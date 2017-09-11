@@ -1,0 +1,13 @@
+.DraftEditor-root {
+    background: #ccc;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    padding: 20px;
+  }
+  
+.DraftEditor-editor {
+  border-top: 1px solid #ddd;
+  cursor: text;
+  font-size: 16px;
+  margin-top: 10px;
+}
