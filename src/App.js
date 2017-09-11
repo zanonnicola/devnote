@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Editor, EditorState} from 'draft-js';
+import {Editor, EditorState, RichUtils} from 'draft-js';
 import logo from './logo.svg';
 import './App.css';
 import './css/editor.css';
@@ -9,6 +9,15 @@ class App extends Component {
     super(props);
     this.state = {editorState: EditorState.createEmpty()};
     this.onChange = (editorState) => this.setState({editorState});
+    this.handleKeyCommand = this.handleKeyCommand.bind(this);
+  }
+  handleKeyCommand(command, editorState) {
+    const newState = RichUtils.handleKeyCommand(editorState, command);
+    if (newState) {
+      this.onChange(newState);
+      return 'handled';
+    }
+    return 'not-handled';
   }
   render() {
     return (
@@ -23,6 +32,7 @@ class App extends Component {
         <Editor 
           editorState={this.state.editorState} 
           onChange={this.onChange} 
+          handleKeyCommand={this.handleKeyCommand}
         />
       </div>
     );
